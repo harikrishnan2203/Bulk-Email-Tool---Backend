@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
 
     // Send verification email
     const authMail = await sendEmail(email, "verification token", `${API}/emailverify/${token}`);
-    console.log(authMail)
+    // console.log(authMail)
     res.status(201).json({
       success: true,
       message: "User created successfully",
@@ -62,8 +62,7 @@ const createUser = async (req, res) => {
 const verifyUser = async (req, res) => {
   try {
     const {id} = req.params;
-    // console.log(req)
-    console.log(id)
+    // console.log(id)
     const tokenExist = await SessionToken.findOneAndDelete({ token: id });
     // console.log(tokenExist);
     if (tokenExist) {
@@ -87,7 +86,7 @@ const verifyUser = async (req, res) => {
 const resetPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log(email);
+    // console.log(email);
     const userExists = await User.findOne({ email });
     if (!userExists) {
       res.status(404).json({
@@ -113,7 +112,7 @@ const resetPassword = async (req, res) => {
         "Reset Password",
         `${API}/update-password/${token}`
       );
-      console.log(mail)
+      // console.log(mail)
       res.status(200).json({
         success: true,
         message: "Reset link send to your registered Email",
@@ -264,7 +263,7 @@ const login = async(req, res) => {
         const checkPassword = await bcrypt.compare(password, findUser.password)
         // console.log(checkPassword)
         if (checkPassword) {
-          const token = jwt.sign({userId: findUser._id}, process.env.SECRET_KEY)
+          const token = jwt.sign({userId: findUser._id}, process.env.SECRET_KEY, { expiresIn: '1h' } )
           res.status(200).json({
             success: true,
             message: "Login Successful",

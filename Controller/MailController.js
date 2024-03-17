@@ -77,7 +77,7 @@ const deletionCred = async(req, res) => {
     try {
         const userId = req.header('user')
         const deletionCred = await MailCredentials.deleteOne({user: userId})
-        console.log(deletionCred)
+        // console.log(deletionCred)
         if (deletionCred.deletedCount == 0) {
             res.status(404).json({
                 success: false,
@@ -112,7 +112,7 @@ const deletionCred = async(req, res) => {
             // If user credentials not found, use default credentials;
             let password = process.env.PASS;
             const result = await sendBulkEmail(newMail.recipients, newMail.subject,newMail.body,userEmail, password );
-            console.log(result);
+            // console.log(result);
 
             const sentitem = await SentItems.create({
                 user: activeUser,
