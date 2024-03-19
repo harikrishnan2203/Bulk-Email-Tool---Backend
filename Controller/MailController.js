@@ -238,7 +238,6 @@ const chartLogs = async (req, res) => {
         time: e.time,
         mailCount: e.accepted.length
     }))
-
     res.status(200).json({
         success: true,
         message: "Chart data fetched successfully",
