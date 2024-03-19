@@ -7,13 +7,14 @@ const { ObjectId } = require('mongoose').Types;
 const createCred = async(req, res) => {
     try {
         const user = req.header("user")
-        const { email, password } = req.body;
+        // console.log(user)
+        const { email, password, provider } = req.body;
         const credExist = await MailCredentials.findOne({user})
         // console.log(credExist)
         if (credExist) {
             const updateCred = await MailCredentials.updateOne(
                 {user: user},
-                {$set: {email: email, password: password}})
+                {$set: {email: email, password: password, provider: provider}})
                 // console.log(updateCred)
                 res.status(200).json({
                     success: true,
@@ -24,7 +25,8 @@ const createCred = async(req, res) => {
             const newCred = await MailCredentials.create({
                 email: email,
                 password: password,
-                user: user
+                user: user,
+                provider: provider
             })
             // console.log(newCred)
             res.status(200).json({
@@ -56,7 +58,8 @@ const getCred = async (req, res) => {
         }
         const result = {
             email: userCred.email,
-            password: userCred.password
+            password: userCred.password,
+            provider: userCred.provider
         };
         // console.log(result);
         res.status(200).json({
@@ -102,10 +105,10 @@ const deletionCred = async(req, res) => {
     const sendMail = async (req, res) => {
         try {
         const newMail = req.body;
-        // console.log(req.header("user"))
         const activeUser = req.header("user");
         //   const activeUser = newMail.user;
         const activeUserCred = await MailCredentials.findOne({user: activeUser});
+        // console.log(activeUserCred)
         if (activeUserCred === null) {
             let userEmail = process.env.USER
             // console.log(userEmail)
@@ -131,8 +134,8 @@ const deletionCred = async(req, res) => {
                 result: sentitem
             })
         } else {
-            const result = await sendBulkEmail(newMail.recipients, newMail.subject,newMail.body,activeUserCred.email,activeUserCred.password);
-            // console.log(result);
+            const result = await sendBulkEmail(newMail.recipients, newMail.subject,newMail.body,activeUserCred.email,activeUserCred.password, activeUserCred.provider);
+            // console.log(activeUserCred.provider);
             const sentitem = {
             user: activeUser,
             from: activeUserCred.email,
