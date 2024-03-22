@@ -8,6 +8,7 @@ const {sendEmail} = require("../Nodemailer/SendEmail")
 const saltRounds = 10;
 
 const API = "https://bulk-email-tool-22.netlify.app";
+// const API = "http://localhost:3000";
 // create a new user
 const createUser = async (req, res) => {
   try {
