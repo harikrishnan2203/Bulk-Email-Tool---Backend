@@ -6,9 +6,9 @@ const sendBulkEmail = async (email, subject, message, user, pass, provider) => {
 
         if (provider === "gmail") {
             transporter = nodemailer.createTransport({
-                host: process.env.HOST,
-                service: "gmail",
-                secure: Boolean(process.env.SECURE),
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
                 auth: {
                     user: user,
                     pass: pass
@@ -16,9 +16,9 @@ const sendBulkEmail = async (email, subject, message, user, pass, provider) => {
             });
         } else if (provider === "outlook") {
             transporter = nodemailer.createTransport({
-                service: "hotmail",
-                host: "smtp-mail.outlook.com",
-                port:587,
+                host: 'smtp.office365.com',
+                port: 587,
+                secure: false,
                 auth: {
                     user: user,
                     pass: pass
@@ -35,6 +35,7 @@ const sendBulkEmail = async (email, subject, message, user, pass, provider) => {
             html: message,
         });
 
+        // console.log("Email sent successfully:", info.response);
         return info;
     } catch (error) {
         console.error("Error sending email:", error);

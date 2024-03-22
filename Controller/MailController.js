@@ -105,6 +105,7 @@ const deletionCred = async(req, res) => {
     const sendMail = async (req, res) => {
         try {
         const newMail = req.body;
+        // console.log(newMail)
         const activeUser = req.header("user");
         //   const activeUser = newMail.user;
         const activeUserCred = await MailCredentials.findOne({user: activeUser});
