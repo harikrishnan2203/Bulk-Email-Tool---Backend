@@ -8,6 +8,9 @@ const {sendEmail} = require("../Nodemailer/SendEmail")
 const saltRounds = 10;
 
 const API = "https://bulk-email-tool-22.netlify.app";
+
+const verifyText = "We're excited to have you get started. First, you need to verify your account. Just press the button below."
+const resetText = "Please click the button below to reset your password:"
 // const API = "http://localhost:3000";
 // create a new user
 const createUser = async (req, res) => {
@@ -43,7 +46,7 @@ const createUser = async (req, res) => {
     });
 
     // Send verification email
-    const authMail = await sendEmail(email, "verification token", `${API}/emailverify/${token}`);
+    const authMail = await sendEmail(email, verifyText, "Verification Token", `${API}/emailverify/${token}`);
     // console.log(authMail)
     res.status(201).json({
       success: true,
@@ -109,6 +112,7 @@ const resetPassword = async (req, res) => {
 
       // Send verification email
       const mail = await sendEmail(
+        resetText,
         email,
         "Reset Password",
         `${API}/update-password/${token}`
