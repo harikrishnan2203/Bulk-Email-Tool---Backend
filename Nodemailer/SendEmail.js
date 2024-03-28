@@ -143,7 +143,7 @@ const sendEmail = async (email, subject, content, text) => {
                             </h2>
                             <img src=" https://img.freepik.com/free-vector/email-notification-icon-isolated-white-background-vector-cartoon-illustration-envelope-with-letter-computer-screen-new-message-received-inbox-alert-business-software-design-element_107791-23706.jpg?w=1380&t=st=1711635410~exp=1711636010~hmac=9d346a7eba22ed8565e0f01c8b63c0257feb02059c0abf81c02b19b7510b1b25" width="200" height="180" style="display: block; border: 0px;" />
                             <div class="h4" style="font-size: 30px; font-weight: 400">
-                                ${subject}
+                                ${content}
                             </div>
                         </td>
                     </tr>
@@ -155,7 +155,7 @@ const sendEmail = async (email, subject, content, text) => {
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">${content}</p>
+                            <p style="margin: 0;">${subject}</p>
                         </td>
                     </tr>
                     <tr>
