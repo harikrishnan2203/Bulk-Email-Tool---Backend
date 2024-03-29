@@ -46,7 +46,7 @@ const createUser = async (req, res) => {
     });
 
     // Send verification email
-    const authMail = await sendEmail(email, verifyText, "Verification Token", `${API}/emailverify/${token}`);
+    const authMail = await sendEmail(email, verifyText, "Verification Account", `${API}/emailverify/${token}`);
     // console.log(authMail)
     res.status(201).json({
       success: true,
@@ -112,9 +112,9 @@ const resetPassword = async (req, res) => {
 
       // Send verification email
       const mail = await sendEmail(
-        resetText,
         email,
         "Reset Password",
+        resetText,
         `${API}/update-password/${token}`
       );
       // console.log(mail)
