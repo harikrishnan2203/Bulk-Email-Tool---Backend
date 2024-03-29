@@ -46,7 +46,12 @@ const createUser = async (req, res) => {
     });
 
     // Send verification email
-    const authMail = await sendEmail(email, "Verification Account",verifyText, `${API}/emailverify/${token}`);
+    const authMail = await sendEmail(
+email,
+"Verify Account",
+verifyText, 
+`${API}/emailverify/${token}`
+);
     // console.log(authMail)
     res.status(201).json({
       success: true,
@@ -288,7 +293,12 @@ const login = async(req, res) => {
           token: token,
           DateTime: new Date()
         })
-        await sendEmail(email, "Verification Token",verifyText, `${API}/emailverify/${token}`)
+        await sendEmail(
+email,
+"Verify Account",
+verifyText,
+`${API}/emailverify/${token}`
+)
         res.status(200).json({
           success: false,
           message:"Verification link send to your registered email"
