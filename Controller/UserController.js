@@ -10,7 +10,7 @@ const saltRounds = 10;
 const API = "https://bulk-email-tool-22.netlify.app";
 
 const verifyText = "We're excited to have you get started. First, you need to verify your account. Just press the button below."
-const resetText = "Please click the button below to reset your password:"
+const resetText = "Please click the below button to reset your password:"
 // const API = "http://localhost:3000";
 // create a new user
 const createUser = async (req, res) => {
